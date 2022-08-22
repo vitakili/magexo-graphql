@@ -1,12 +1,11 @@
 <template>
 
   <div v-if="categories && categories.items.length > 0">
-      <v-chip
+      <div
           v-for="category in categories.items" :key="category.uid"
-          :class="chipclass"
       >
         <router-link :to="'/category/' + category.id + '/1'">{{category.name}}</router-link>
-      </v-chip>
+      </div>
   </div>
   <div v-else>
     Žádné podkategorie <br>
@@ -22,11 +21,6 @@ export default {
       required: false,
       default: false,
       type: [String, Boolean]
-    }
-  },
-  computed: {
-    chipclass: () => {
-      return {'d-block': true, 'mr-3': true, 'mb-2': true}
     }
   },
   apollo: {

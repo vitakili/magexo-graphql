@@ -8,11 +8,13 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 
 ## Install dependecies
-npm i or npm Install
+> npm i / npm Install
 
 ## Run development client
-npm run dev
+> npm run dev
 
 ## Since CORS policy won't let you to fetch data
-As I used Firefox it is recommended for you to use plugin 
-- CORS Everywhere
+As I used Firefox it is recommended for you to use extension 
+> CORS Everywhere
+For Chrome I recommend extension
+> Access Control-Allow-Origin - Unblock

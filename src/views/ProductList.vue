@@ -33,7 +33,7 @@
                 outlined
                 tile
             >
-              <v-img :src="product.image.url" height="450" class="img-responsive"></v-img>
+              <img :src="product.image.url" height="450" class="img-responsive"/>
               <h2>{{product.name}}</h2>
               <h3>{{product.price_range.minimum_price.regular_price.value}} {{product.price_range.minimum_price.regular_price.currency}}</h3>
             </v-card>

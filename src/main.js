@@ -28,11 +28,11 @@ const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
 })
 
+
 const v3app = createApp(App)
 
 v3app.provide(DefaultApolloClient, apolloClient).use(router)
 v3app.use(apolloProvider)
 v3app.mount('#app')
-
 
 

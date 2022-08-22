@@ -1,13 +1,8 @@
 <template>
-  <v-app>
     <NavigationMenu/>
-
-    <v-main>
-      <v-container>
+      <div class="container">
         <RouterView></RouterView>
-      </v-container>
-    </v-main>
-  </v-app>
+      </div>
 </template>
 
 <script>
@@ -31,5 +26,10 @@ export default {
 
   body {
     font-family: 'fira', sans-serif
+  }
+  .container {
+    max-width: 1170px;
+    margin-left:auto;
+    margin-right:auto;
   }
 </style>>

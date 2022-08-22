@@ -1,9 +1,5 @@
 <template>
-  <header
-      app
-      color="primary"
-      dark
-    >
+  <header>
     <nav>
       <div class="d-flex align-center">
         <router-link to="/">
@@ -15,7 +11,7 @@
       </div>
     <div class="menu-item"><a href=""></a>Home</div>
     <div class="menu-item"><a href=""></a>About</div>
-    <Dropdown title="Services" :items="services" />
+    <Dropdown title="Services" :items="services" :is_expanded="false"/>
     <div class="menu-item"><a href=""></a>Contact</div>
     </nav>
     </header>
@@ -25,7 +21,7 @@
 import Dropdown from './Dropdown.vue';
 
 export default {
-  name: 'navigationMenu',
+  name: 'NavigationMenu',
   components: {
     Dropdown
   },
@@ -50,7 +46,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../assets/_variables.scss';
 
   header{
@@ -58,6 +54,8 @@ export default {
     background-color: $bg-color;
     text-transform:uppercase;
     color: $light-font;
+    border-image: $border_image 100% 0 stretch;
+    border-bottom: 2px solid;
     padding: 15px;
         .logo {
             margin-bottom: 1rem;
