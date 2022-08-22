@@ -1,0 +1,27 @@
+{
+  "name": "vite-js",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.31",
+    "sass": "^1.54.5",
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "@vitejs/plugin-vue": "^2.2.2",
+    "@vue/apollo-composable": "*",
+    "@vue/apollo-option": "^4.0.0-alpha.20",
+    "axios": "^0.27.2",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "sass-loader": "^13.0.2",
+    "vue": "^3.2.31",
+    "vue-apollo": "^3.1.0",
+    "vue-router": "^4.1.3"
+  }
+}
