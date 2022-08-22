@@ -3,8 +3,8 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
 import { createApolloProvider } from '@vue/apollo-option'
 import App from './App.vue'
+import './index.css'
 import router from './router'
-
 
 const httpLink = createHttpLink({
   uri: 'https://venia.magento.com/graphql',

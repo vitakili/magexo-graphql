@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@headlessui/vue": "^1.6.7",
+    "@heroicons/vue": "^1.0.6",
     "@vitejs/plugin-vue": "^2.2.2",
     "@vue/apollo-composable": "*",
     "@vue/apollo-option": "^4.0.0-alpha.20",
