@@ -42,7 +42,7 @@ export default {
     XIcon
   },
   setup() {
-    const open = ref(true);
+    const open = ref(false);
     const MenuOpen = () => {
       open.value = !open.value
     }
@@ -94,22 +94,23 @@ export default {
       align-items: center;
        ul{
          background-color: $bg-color;
+         z-index:999;
          li{
-        color:$light-font;
-        padding: 10px 20px;
-        position:relative;
-        text-align:center;
-        border-bottom: 3px solid transparent;
-        transition: 0.4s;
-          a {
-            color: inherit;
-            text-decoration: none;
-          }
-          .active,&:hover {
-            background-color: $bg-color;
-            border-bottom-color: $light-font;
-            cursor: pointer;
-          }
+            color:$light-font;
+            padding: 10px 20px;
+            position:relative;
+            text-align:center;
+            border-bottom: 3px solid transparent;
+            transition: 0.4s;
+              a {
+                color: inherit;
+                text-decoration: none;
+              }
+              .active,&:hover {
+                background-color: $bg-color;
+                border-bottom-color: $light-font;
+                cursor: pointer;
+              }
         }
        }
     }

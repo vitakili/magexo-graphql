@@ -61,21 +61,11 @@
     </Listbox>
   </div>
 
-
-  <!-- <div v-if="categories && categories.items.length > 0">
-      <div
-          v-for="category in categories.items" :key="category.uid"
-      >
-        <router-link :to="'/category/' + category.id + '/1'">{{category.name}}</router-link>
-      </div>
-  </div>
-  <div v-else>
-    Žádné podkategorie <br>
-  </div> -->
 </template>
 
 <script>
-import { ref } from 'vue'
+import gql from "graphql-tag";
+
 import {
   Listbox,
   ListboxLabel,
@@ -85,15 +75,15 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 
-import gql from "graphql-tag";
+
 export default {
   name: "CategoryMenu",
   components: {
       Listbox,
-  ListboxLabel,
-  ListboxButton,
-  ListboxOptions,
-  ListboxOption,
+      ListboxLabel,
+      ListboxButton,
+      ListboxOptions,
+      ListboxOption,
   CheckIcon, 
   SelectorIcon
   },

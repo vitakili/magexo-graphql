@@ -3,7 +3,7 @@ module.exports = {
     service: {
       name: 'graphql',
       // URL to the GraphQL API
-      url: "https://venia.magento.com/graphql",
+      url: env.VUE_APPOLLO_GRAPHQL_HTTP,
     },
     // Files processed by the extension
     includes: [

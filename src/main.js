@@ -7,10 +7,7 @@ import './index.css'
 import router from './router'
 
 const httpLink = createHttpLink({
-  uri: 'https://venia.magento.com/graphql',
-  // fetchOptions: {
-  //   mode: 'no-cors',
-  // }
+  uri: '/graphql',
 })
 
 // Cache implementation
@@ -31,8 +28,8 @@ const apolloProvider = createApolloProvider({
 
 const v3app = createApp(App)
 
-v3app.provide(DefaultApolloClient, apolloClient).use(router)
 v3app.use(apolloProvider)
+v3app.use(router)
 v3app.mount('#app')
 
 
