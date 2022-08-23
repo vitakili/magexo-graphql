@@ -96,6 +96,7 @@ export default {
          background-color: $bg-color;
          z-index:999;
          li{
+            font-weight:700;
             color:$light-font;
             padding: 10px 20px;
             position:relative;

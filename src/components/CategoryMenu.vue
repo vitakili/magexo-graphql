@@ -41,7 +41,7 @@
                     selected ? 'font-medium' : 'font-normal',
                     'block truncate',
                   ]"
-                  ><router-link :to="'/category/' + category.id + '/1'">{{category.name}}</router-link></span
+                  ><router-link :to="{ name: 'ProductList', params: {name: nameEdit(category.name), id: category.uid, title: category.name}}">{{category.name}}</router-link></span
                 >
                 <span
                   v-if="selected"
@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
-
+import { CATEGORIES } from '../graphql/categories'
+  
 import {
   Listbox,
   ListboxLabel,
@@ -96,43 +96,7 @@ export default {
   },
   apollo: {
     categories: {
-      query: gql`query
-        example($filters: CategoryFilterInput){
-          categories(
-            filters: $filters
-            pageSize:20,
-            currentPage: 1
-          ) {
-            total_count
-            items {
-              id
-              uid
-              level
-              name
-              path
-              children_count
-              children {
-                uid
-                level
-                name
-                path
-                children_count
-                children {
-                  uid
-                  level
-                  name
-                  path
-                }
-              }
-            }
-            page_info {
-              current_page
-              page_size
-              total_pages
-            }
-          }
-        }
-      `,
+      query: CATEGORIES,
       variables(){
           if(this.parentcategory == false){
             return {
@@ -147,6 +111,14 @@ export default {
           }
       }
     },
+  },
+  methods: {
+    nameEdit (name) {
+      return name.split(/[ ,]+/).join('-').toLowerCase()
+    },
+    nameLower (name) {
+      return name.toLowerCase()
+    }
   },
 }
 </script>

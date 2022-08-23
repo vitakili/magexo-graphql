@@ -18,16 +18,32 @@
     </div>
   </div>
   <div>
+    <div class="container">
+      <ProductList :id="defaultId"></ProductList>
+    </div>
   </div>
 </template>
 
 <script>
+import { DEFAULT_CAT } from '../graphql/defaultcat';
 import CategoryMenu from '@/components/CategoryMenu.vue';
+import ProductList from './ProductList.vue';
+
 export default {
   components: {
     CategoryMenu,
+    ProductList
   },
-  name: "Home"
+  name: "Home",
+  aapollo: {
+    defaultId: {
+      query: DEFAULT_CAT,
+      update: (data) => data.categories.items[0].uid
+    }
+  },
+  data: () => ({
+    defaultId: ''
+  })
 }
 </script>
 
