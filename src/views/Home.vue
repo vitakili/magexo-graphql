@@ -8,7 +8,7 @@
       >
         Co na sebe?
         <br />
-        <span class="light-text">Zde si vybere každý</span>
+        <span class="light-text">Zde si vybere každá</span>
       </h2>
       <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
         <div class="inline-flex rounded-md shadow">
@@ -17,17 +17,19 @@
       </div>
     </div>
   </div>
-  <div>
+  
     <div class="container">
-      <ProductList :id="defaultId"></ProductList>
+      <ProductList 
+          :id="defaultId"
+          >
+      </ProductList>
     </div>
-  </div>
 </template>
 
 <script>
 import { DEFAULT_CAT } from '../graphql/defaultcat';
 import CategoryMenu from '@/components/CategoryMenu.vue';
-import ProductList from './ProductList.vue';
+import ProductList from '@/components/ProductList.vue';
 
 export default {
   components: {

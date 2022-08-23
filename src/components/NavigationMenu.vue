@@ -9,10 +9,7 @@
           </div>
         </router-link>
       </div>
-    <!-- <div class="menu-item"><a href=""></a>Home</div>
-    <div class="menu-item"><a href=""></a>About</div>
-    <Dropdown title="Services" :items="services" :is_expanded="false"/>
-    <div class="menu-item"><a href=""></a>Contact</div> -->
+    <!-- <Dropdown/> -->
 
     <span @click="MenuOpen()" class="absolute md:hidden right-6 top-1.5 cursor-pointer text-4x1">
       <XIcon v-if="open"  class="h-6 w-6"/>
@@ -20,8 +17,8 @@
     </span>
     <ul class="md:flex md:items-center md:px-0 px-3 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-14 duration-700 ease-in"
       :class="[open ? 'left-0' : 'left-[-100%]']">
-      <li class="md:mx-4 md:my-0 my-6" v-for="(service, i) in services" :key="i">
-        <a :href="service.link">{{service.title}}</a>
+      <li class="md:mx-4 md:my-0 my-6" v-for="(category, i) in categories.children" :key="i">
+        <a :href="'/'+nameEdit(category.name)+'/'+category.uid">{{category.name}}</a>
       </li>
     </ul>
     
@@ -33,14 +30,42 @@
 import Dropdown from './Dropdown.vue';
 import { ref } from 'vue';
 import { MenuIcon, XIcon } from "@heroicons/vue/outline"
+import gql from 'graphql-tag'
+
+const CATEGORIES = gql`
+  query {
+    categories(pageSize: 1, currentPage: 1) {
+      total_count
+      items {
+        uid
+        level
+        name
+        path
+        children_count
+        children {
+          uid
+          name
+          path
+          children_count
+          children {
+            uid
+            level
+            name
+            path
+          }
+        }
+      }
+    }
+  }
+`
 
 export default {
   name: 'NavigationMenu',
   components: {
     Dropdown,
     MenuIcon,
-    XIcon
-  },
+    XIcon,
+},
   setup() {
     const open = ref(false);
     const MenuOpen = () => {
@@ -48,24 +73,24 @@ export default {
     }
     return{MenuOpen, open }
     },
-  data () {
-    return {
-      services: [
-        {
-          title: 'Web',
-          link: '#'
-        },
-                {
-          title: 'Design',
-          link: '#'
-        },
-                {
-          title: 'Trying',
-          link: '#'
-        },
-      ],
+  apollo: {
+    categories: {
+      query: CATEGORIES,
+      update: (data) => data.categories.items[0]
     }
-  }
+  },
+  methods: {
+    nameEdit (name) {
+      return name.split(/[ ,]+/).join('-').toLowerCase()
+    },
+    nameLower (name) {
+      return name.toLowerCase()
+    }
+  },
+  data: () => ({
+    categories: []
+  }),
+  mounted () {}
 }
 
 </script>
