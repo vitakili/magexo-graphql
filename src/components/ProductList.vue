@@ -110,10 +110,10 @@ export default {
       return Math.ceil(this.products.total_count / this.pageSize)
     },
     pages() {
-      const numShown = Math.min(this.numShown, this.products.total_count);
+      const numShown = Math.min(this.numShown, this.totalPages);
       let first = this.currentPage - Math.floor(numShown / 2);
       first = Math.max(first, 1);
-      first = Math.min(first,this.products.total_count - numShown + 1);
+      first = Math.min(first,this.totalPages - numShown + 1);
       return [...Array(numShown)].map((k,i) => i + first);
     }
   },
