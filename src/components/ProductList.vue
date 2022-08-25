@@ -26,21 +26,29 @@
       </div>
 
       <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination" v-if="products.total_count > pageSize">
-        <div @click="previous()" :class="{ disabled: currentPage === 1 }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <div @click="onFirstPage()" :class="{ disabled: isInFirstPage }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+          <span class="sr-only">Na první</span>
+          <ChevronDoubleLeftIcon class="h-5 w-5"/>
+        </div>
+        <div @click="onPrev()" :class="{ disabled: currentPage === 1 }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
           <span class="sr-only">Předešlý</span>
           <ChevronLeftIcon class="h-5 w-5"/>
         </div>
         <div class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-          v-for="index in totalPages"
+          v-for="index in pages"
           :key="index"
           :class="{ active: index === currentPage }"
           @click="changePage(index)"
         >
           {{ index }}
         </div>
-        <div @click="next()" :class="{ disabled: currentPage === totalPages }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <div @click="onNext()" :class="{ disabled: currentPage === totalPages }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
           <span class="sr-only">Následující</span>
           <ChevronRightIcon class="h-5 w-5"/>
+        </div>
+        <div @click="onLastPage(totalPages)" :class="{ disabled: currentPage === totalPages }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+          <span class="sr-only">Na poslední</span>
+        <ChevronDoubleRightIcon class="h-5 w-5"/>
         </div>
       </nav>
     </div>
@@ -49,13 +57,15 @@
 
 <script>
 import { PRODUCTS } from '../graphql/products'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
+import { ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/vue/solid'
 
 export default {
   name: 'ProductList',
   components:{
     ChevronLeftIcon,
-    ChevronRightIcon
+    ChevronRightIcon,
+    ChevronDoubleLeftIcon,
+    ChevronDoubleRightIcon
   },
   props: {
     id: String,
@@ -82,13 +92,14 @@ export default {
       currentPage: 1,
       products: [],
       pageSize: 6,
+      numShown: 5
     }
   },
   watch: {
-    id(newId, oldId) {
+    id(pageId) {
       this.currentPage = 1
       this.$apollo.queries.products.refetch({
-        id: newId,
+        id: pageId,
         currentPage: 1,
         pageSize: this.pageSize,
       })
@@ -98,34 +109,43 @@ export default {
     totalPages() {
       return Math.ceil(this.products.total_count / this.pageSize)
     },
+    pages() {
+      const numShown = Math.min(this.numShown, this.products.total_count);
+      let first = this.currentPage - Math.floor(numShown / 2);
+      first = Math.max(first, 1);
+      first = Math.min(first,this.products.total_count - numShown + 1);
+      return [...Array(numShown)].map((k,i) => i + first);
+    }
   },
   methods: {
     changePage(index) {
       this.products = []
       this.currentPage = index
-      this.refetch()
     },
-    previous() {
+    onPrev() {
       if (this.currentPage > 1) {
         this.products = []
         this.currentPage--
-        this.refetch()
       }
     },
-    next() {
+    onNext() {
       if (this.currentPage < this.totalPages) {
         this.products = []
         this.currentPage++
-        this.refetch()
       }
     },
-    refetch() {
-      this.$apollo.queries.products.refetch({
-        id: this.id,
-        currentPage: this.currentPage,
-        pageSize: this.pageSize,
-      })
+    onLastPage(totalPages){
+      if (this.currentPage < this.totalPages) {
+        this.products = []
+        this.currentPage =  totalPages
+      }
     },
+    onFirstPage(){
+      if (this.currentPage > 1) {
+        this.products = []
+        this.currentPage =  1
+      }
+    }
   },
 }
 </script>
