@@ -10,7 +10,7 @@
        {{createTitle}}
         <br />
       </h2>
-      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0  justify-end">
         <CategoryMenu :mainCat="String(id)"></CategoryMenu>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="top-16 w-72">
+  <div class="top-16">
     <Menu as="div" class="relative inline-block text-left" v-if="categories && categories.items.length > 0">
       <div>
           <MenuButton
@@ -29,7 +29,7 @@
               v-slot="{ active }"
               v-for="category in categories.items"
               :key="category.uid"
-              :value="person"
+              :value="category"
               as="template"
             >
             <button
@@ -38,16 +38,13 @@
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
               >
-                <span :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
+                <span
                   ><router-link
                     :to="{
                       name: 'Products',
                       params: { name: webalize(category.name), id: category.uid, title: category.name },
                     }"
                     >{{ category.name }}</router-link>
-                </span>
-                <span v-if="selected" class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
                 </span>
               </button>
             </MenuItem>
@@ -62,7 +59,7 @@
 import { SUBCATEGORY } from '../graphql/subcategory'
 
 import { Menu, MenuButton, MenuItems, MenuItem  } from '@headlessui/vue'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/solid'
+import { ChevronDownIcon } from '@heroicons/vue/solid'
 
 
 export default {
@@ -72,7 +69,6 @@ export default {
     MenuButton, 
     MenuItems, 
     MenuItem,
-    CheckIcon,
     ChevronDownIcon,
   },
   props: {

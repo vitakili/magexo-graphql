@@ -10,7 +10,7 @@
         <br />
         <span class="light-text">Zde si vybere každá</span>
       </h2>
-      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0 justify-end">
           <CategoryMenu/>
       </div>
     </div>

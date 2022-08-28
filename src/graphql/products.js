@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const PRODUCTS = gql`
-  query ($id: String!, $currentPage: Int!, $pageSize: Int!) {
+  query PRODUCTS ($id: String!, $currentPage: Int!, $pageSize: Int!) {
     products(
       filter: { category_uid: { eq: $id } }
       currentPage: $currentPage
