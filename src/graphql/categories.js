@@ -4,8 +4,6 @@ export const CATEGORIES = gql`query
     CATEGORIES($filters: CategoryFilterInput){
   categories(
     filters: $filters
-    pageSize:20,
-    currentPage: 1
   ) {
     total_count
     items {

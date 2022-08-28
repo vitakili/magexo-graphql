@@ -35,12 +35,12 @@
           <ChevronLeftIcon class="h-5 w-5"/>
         </div>
         <div class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-          v-for="index in pages"
-          :key="index"
-          :class="{ active: index === currentPage }"
-          @click="changePage(index)"
+          v-for="i in pages"
+          :key="i"
+          :class="{ active: i === currentPage }"
+          @click="changePage(i)"
         >
-          {{ index }}
+          {{ i }}
         </div>
         <div @click="onNext()" :class="{ disabled: currentPage === totalPages }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
           <span class="sr-only">Následující</span>
@@ -118,9 +118,9 @@ export default {
     }
   },
   methods: {
-    changePage(index) {
+    changePage(i) {
       this.products = []
-      this.currentPage = index
+      this.currentPage = i
     },
     onPrev() {
       if (this.currentPage > 1) {

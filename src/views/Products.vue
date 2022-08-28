@@ -12,7 +12,7 @@
       </h2>
       <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
         <div class="inline-flex rounded-md shadow">
-        <CategoryMenu :parentcategory="String(categoryid)"></CategoryMenu>
+        <CategoryMenu :mainCat="String(id)"></CategoryMenu>
         </div>
       </div>
     </div>
@@ -20,8 +20,8 @@
       <div class="container">
 
           <ProductList       
-              :id="id"
-              :title="title"
+              :id="this.id"
+              :title="this.title"
               >
           </ProductList>
       </div>
@@ -32,7 +32,7 @@
 <script>
 import ProductList from '@/components/ProductList.vue'
 import CategoryMenu from '@/components/CategoryMenu.vue'
-
+import { useRoute } from "vue-router"
 
 export default {
   name: 'Products',
@@ -40,18 +40,19 @@ export default {
     ProductList,
     CategoryMenu
   },
-  watch: {
-    '$route.params.id': function () {
-      this.id = this.$route.params.id
-      this.title = this.$route.params.title
-    }
-  },
+  // watch: {
+  //   useRoute() {
+  //     const id = route.params.id;
+  //     const title = route.params.title;
+  //   }
+  // },
   data () {
     return {
-      id: this.$route.params.id,
-      title: this.$route.params.name
+      id: useRoute().params.id,
+      title: useRoute().params.name
     }
   },
+
   computed: {
     createTitle () {
       const str = this.title.replaceAll('-', ' ')

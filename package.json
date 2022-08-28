@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "start": "vite build"
+    "serve": "vite preview"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.2.31",

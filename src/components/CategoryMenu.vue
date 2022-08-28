@@ -37,7 +37,7 @@
                     ><router-link
                       :to="{
                         name: 'Products',
-                        params: { name: titleChange(category.name), id: category.uid, title: category.name },
+                        params: { name: category.name, id: category.uid, title: category.name },
                       }"
                       >{{ category.name }}</router-link
                     ></span
@@ -50,17 +50,18 @@
             </ListboxOptions>
           </transition>
         </div>
-        <div v-else>Žádné podkategorie <br /></div>
+        <div v-else>Žádné podkategorie</div>
       </div>
     </Listbox>
   </div>
 </template>
 
 <script>
-import { CATEGORIES } from '../graphql/categories'
+import { SUBCATEGORY } from '../graphql/subcategory'
 
 import { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
+
 
 export default {
   name: 'CategoryMenu',
@@ -74,7 +75,7 @@ export default {
     SelectorIcon,
   },
   props: {
-    parentcategory: {
+    mainCat: {
       required: false,
       default: false,
       type: [String, Boolean],
@@ -82,26 +83,19 @@ export default {
   },
   apollo: {
     categories: {
-      query: CATEGORIES,
+      query: SUBCATEGORY,
       variables() {
-        if (this.parentcategory == false) {
+        if (this.mainCat == false) {
           return {
-            filters: {},
+            category_uid: {},
           }
         } else {
           return {
-            filters: {
-              parent_id: { in: [this.parentcategory] },
-            },
+            category_uid: this.mainCat,
           }
         }
       },
     },
-  },
-  methods: {
-    titleChange(name) {
-      return name.split(/[ ,]+/).join('-').toLowerCase()
-    }
   },
 }
 </script>
