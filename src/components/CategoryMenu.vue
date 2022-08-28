@@ -37,7 +37,7 @@
                     ><router-link
                       :to="{
                         name: 'Products',
-                        params: { name: nameEdit(category.name), id: category.uid, title: category.name },
+                        params: { name: titleChange(category.name), id: category.uid, title: category.name },
                       }"
                       >{{ category.name }}</router-link
                     ></span
@@ -99,12 +99,9 @@ export default {
     },
   },
   methods: {
-    nameEdit(name) {
+    titleChange(name) {
       return name.split(/[ ,]+/).join('-').toLowerCase()
-    },
-    nameLower(name) {
-      return name.toLowerCase()
-    },
+    }
   },
 }
 </script>
