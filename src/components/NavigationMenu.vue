@@ -9,16 +9,14 @@
           </div>
         </router-link>
       </div>
-    <!-- <Dropdown/> -->
 
     <span @click="MenuOpen()" class="absolute md:hidden right-6 top-1.5 cursor-pointer text-4x1">
       <XIcon v-if="open"  class="h-6 w-6"/>
       <MenuIcon v-else class="h-6 w-6" />
     </span>
     <ul class="md:flex md:items-center md:px-0 px-3 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-14 duration-700 ease-in"
-      >
+    :class="[open ? 'left-0' : 'left-[-100%]']">
       <li class="md:mx-4 md:my-0 my-6" v-for="(category, i) in categories.children" :key="i">
-        <!-- <a :href="'/'+webalize(category.name)+'/'+category.uid">{{category.name}}</a> -->
         <router-link
         :to="{
           name: 'Products',
@@ -33,7 +31,6 @@
 </template>
 
 <script>
-import Dropdown from './Dropdown.vue';
 import { CATEGORIES } from '../graphql/categories'
 import { ref } from 'vue';
 import { MenuIcon, XIcon } from "@heroicons/vue/outline"
@@ -42,7 +39,6 @@ import { MenuIcon, XIcon } from "@heroicons/vue/outline"
 export default {
   name: 'NavigationMenu',
   components: {
-    Dropdown,
     MenuIcon,
     XIcon,
 },
