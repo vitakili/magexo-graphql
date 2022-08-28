@@ -1,7 +1,7 @@
 <template>
     <NavigationMenu/>
       <div class="container">
-        <RouterView></RouterView>
+        <RouterView :key="$route.path"></RouterView>
       </div>
 </template>
 

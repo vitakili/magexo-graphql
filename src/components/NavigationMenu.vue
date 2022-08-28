@@ -16,9 +16,15 @@
       <MenuIcon v-else class="h-6 w-6" />
     </span>
     <ul class="md:flex md:items-center md:px-0 px-3 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-14 duration-700 ease-in"
-      :class="[open ? 'left-0' : 'left-[-100%]']">
+      >
       <li class="md:mx-4 md:my-0 my-6" v-for="(category, i) in categories.children" :key="i">
-        <a :href="'/'+webalize(category.name)+'/'+category.uid">{{category.name}}</a>
+        <!-- <a :href="'/'+webalize(category.name)+'/'+category.uid">{{category.name}}</a> -->
+        <router-link
+        :to="{
+          name: 'Products',
+          params: { name: webalize(category.name), id: category.uid, title: category.name },
+        }"
+        >{{ category.name }}</router-link>
       </li>
     </ul>
     
@@ -61,8 +67,7 @@ export default {
   data: () => ({
     categories: []
   }),
-  mounted () {},
-
+  mounted () {}
 }
 
 </script>

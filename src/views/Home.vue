@@ -11,9 +11,7 @@
         <span class="light-text">Zde si vybere každá</span>
       </h2>
       <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-        <div class="inline-flex rounded-md shadow">
           <CategoryMenu/>
-        </div>
       </div>
     </div>
   </div>

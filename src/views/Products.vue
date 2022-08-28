@@ -11,9 +11,7 @@
         <br />
       </h2>
       <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-        <div class="inline-flex rounded-md shadow">
         <CategoryMenu :mainCat="String(id)"></CategoryMenu>
-        </div>
       </div>
     </div>
   </div>
