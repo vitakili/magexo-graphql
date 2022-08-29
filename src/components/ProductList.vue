@@ -42,7 +42,7 @@
       </div>
 
       <div class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px paginated" aria-label="Pagination" v-if="products.total_count > pageSize">
-        <div @click="onFirstPage()" :class="{ disabled: isInFirstPage }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <div @click="onFirstPage()" :class="{ disabled: currentPage === 1 }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
           <span class="sr-only">Na první</span>
           <ChevronDoubleLeftIcon class="h-5 w-5"/>
         </div>
@@ -54,7 +54,7 @@
           v-for="i in pages"
           :key="i"
           :class="{ active: i === currentPage }"
-          @click="changePage(i)"
+          @click="i !== currentPage ? changePage(i) : ''"
         >
           {{ i }}
         </div>
@@ -127,7 +127,7 @@ export default {
       return Math.ceil(this.products.total_count / this.pageSize)
     },
     pages() {
-      const numShown = Math.min(this.numShown, this.totalPages);
+      let numShown = Math.min(this.numShown, this.totalPages);
       let first = this.currentPage - Math.floor(numShown / 2);
       first = Math.max(first, 1);
       first = Math.min(first,this.totalPages - numShown + 1);

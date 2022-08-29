@@ -7,7 +7,7 @@
       <h2
         class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
       >
-       {{createTitle}}
+       {{updateTitle}}
         <br />
       </h2>
       <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0  justify-end">
@@ -20,6 +20,7 @@
           <ProductList       
               :id="this.id"
               :title="this.title"
+              :name="updateTitle"
               >
           </ProductList>
       </div>
@@ -38,21 +39,26 @@ export default {
     ProductList,
     CategoryMenu
   },
-  // watch: {
-  //   useRoute() {
-  //     const id = route.params.id;
-  //     const title = route.params.title;
-  //   }
-  // },
+  setup(){
+    if(!!useRoute().params.id){ 
+      localStorage.setItem("cat_id",useRoute().params.id)
+    }
+  },
+  watch: {
+    useRoute() {
+      const id = route.params.id;
+      const title = route.params.title;
+    }
+  },
   data () {
     return {
-      id: useRoute().params.id,
+      id: localStorage.getItem("cat_id"),
       title: useRoute().params.name
     }
   },
 
   computed: {
-    createTitle () {
+    updateTitle () {
       const str = this.title.replaceAll('-', ' ')
       return  str.charAt(0).toUpperCase() + str.slice(1)
     },

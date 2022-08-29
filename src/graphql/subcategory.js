@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 
 export const SUBCATEGORY = gql`query
-    SUBCATEGORY($category_uid: [String] ){
-        categories(
-            filters: {
-                parent_category_uid: {in: $category_uid }
-            }
-        ) {
+SUBCATEGORY($category_uid: [String] ){
+  categories(
+      filters: {
+          parent_category_uid: {in: $category_uid }
+      }
+  )  {
           total_count
           items {
             id

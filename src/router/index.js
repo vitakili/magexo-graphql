@@ -11,7 +11,7 @@ const router = createRouter({
             component: Home
         },
         {
-            path: '/:name/:id',
+            path: '/:name',
             name: 'Products',
             component: Products,
             props: true

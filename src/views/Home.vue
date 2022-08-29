@@ -19,6 +19,7 @@
     <div class="container">
       <ProductList 
           :id="defaultId"
+          :name="name"
           >
       </ProductList>
     </div>
@@ -38,11 +39,12 @@ export default {
   aapollo: {
     defaultId: {
       query: DEFAULT_CAT,
-      update: (data) => data.categories.items[0].uid
+      update: (data) => data.categories.items[0].title
     }
   },
   data: () => ({
-    defaultId: ''
+    defaultId: '',
+    name:'Default'
   })
 }
 </script>
