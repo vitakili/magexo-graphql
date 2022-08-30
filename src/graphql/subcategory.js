@@ -6,7 +6,7 @@ SUBCATEGORY($category_uid: [String] ){
       filters: {
           parent_category_uid: {in: $category_uid }
       }
-  )  {
+     )  {
           total_count
           items {
             id
@@ -28,11 +28,6 @@ SUBCATEGORY($category_uid: [String] ){
                 path
               }
             }
-          }
-          page_info {
-            current_page
-            page_size
-            total_pages
           }
         }
       }

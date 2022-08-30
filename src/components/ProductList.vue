@@ -89,6 +89,11 @@ export default {
       type: String,
       default: 'Home',
     },
+    name: String,
+    selected: {
+      type:Number,
+      default: 6
+    }
   },
   apollo: {
     products: {
@@ -97,7 +102,7 @@ export default {
         return {
           id: this.id,
           currentPage: this.currentPage,
-          pageSize: this.pageSize,
+          pageSize: this.selected,
         }
       },
       update: data => data.products,
