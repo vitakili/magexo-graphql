@@ -38,8 +38,6 @@ import ProductList from '@/components/ProductList.vue'
 import CategoryMenu from '@/components/CategoryMenu.vue'
 import SelectMenu from '@/components/SelectMenu.vue'
 import { useRoute } from "vue-router"
-
-
 export default {
   name: 'Products',
   components: {

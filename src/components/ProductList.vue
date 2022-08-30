@@ -41,7 +41,11 @@
         </div>
       </div>
 
-      <div class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px paginated" aria-label="Pagination" v-if="products.total_count > pageSize">
+      <div 
+        v-if="totalPages > 1" 
+        class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px paginated" 
+        aria-label="Pagination" 
+        >
         <div @click="onFirstPage()" :class="{ disabled: currentPage === 1 }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
           <span class="sr-only">Na první</span>
           <ChevronDoubleLeftIcon class="h-5 w-5"/>
@@ -112,7 +116,7 @@ export default {
     return {
       currentPage: 1,
       products: [],
-      pageSize: 6,
+      pageSize: this.selected,
       numShown: 5,
     }
   },
@@ -121,15 +125,15 @@ export default {
       this.currentPage = 1
       this.$apollo.queries.products.refetch({
         id: pageId,
-        currentPage: 1,
-        pageSize: this.pageSize,
+        currentPage: this.currentPage,
+        pageSize: this.selected,
         }
       )
     },
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.products.total_count / this.pageSize)
+      return Math.ceil(this.products.total_count / this.selected)
     },
     pages() {
       let numShown = Math.min(this.numShown, this.totalPages);
