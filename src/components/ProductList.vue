@@ -109,7 +109,6 @@ export default {
           pageSize: this.selected,
         }
       },
-      update: data => data.products,
     },
   },
   data() {

@@ -1,4 +1,4 @@
-<template>
+<template slot-scope="{ result: { loading, error, data} }">
   <header>
     <nav class="py-3.5 px-6  container flex justify-between">
       <div class="flex justify-start lg:w-0 lg:flex-1">
@@ -14,9 +14,9 @@
       <XIcon v-if="open"  class="h-6 w-6"/>
       <MenuIcon v-else class="h-6 w-6" />
     </span>
-    <ul class="md:flex md:items-center md:px-0 px-3 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-14 duration-500 ease-in"
+    <ul v-if="!$apollo.loading" class="md:flex md:items-center md:px-0 px-3 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-14 duration-500 ease-in"
     :class="[open ? 'left-0' : 'left-[-100%]']">
-      <li @click="MenuOpen()"  class="md:mx-4 md:my-0 my-6" v-for="(category, i) in categories.children" :key="i">
+      <li @click="MenuOpen()"  class="md:mx-4 md:my-0 my-6" v-for="(category, i) in categories.items[0].children" :key="i">
         <router-link
         :to="{
           name: 'ProductsView',
@@ -52,7 +52,6 @@ export default {
   apollo: {
     categories: {
       query: CATEGORIES,
-      update: (data) => data.categories.items[0]
     }
   },
   methods: {
