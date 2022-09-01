@@ -98,7 +98,6 @@ export default {
   methods: {
     onSelected: function() {
       this.$emit('select-option', this.selectedOption)
-      console.log(this.selectedOption)
     }
   },
 

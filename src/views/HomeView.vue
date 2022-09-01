@@ -35,7 +35,7 @@ export default {
     CategoryMenu,
     ProductList
   },
-  name: "Home",
+  name: "HomeView",
   aapollo: {
     defaultId: {
       query: DEFAULT_CAT,

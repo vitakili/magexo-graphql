@@ -37,7 +37,7 @@
                 <span
                   ><router-link
                     :to="{
-                      name: 'Products',
+                      name: 'ProductsView',
                       params: { name: webalize(category.name), id: category.uid, title: category.name },
                     }"
                     >{{ category.name }}

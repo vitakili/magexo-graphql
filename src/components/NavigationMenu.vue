@@ -19,7 +19,7 @@
       <li @click="MenuOpen()"  class="md:mx-4 md:my-0 my-6" v-for="(category, i) in categories.children" :key="i">
         <router-link
         :to="{
-          name: 'Products',
+          name: 'ProductsView',
           params: { name: webalize(category.name), id: category.uid, title: category.name },
         }"
         >{{ category.name }}</router-link>

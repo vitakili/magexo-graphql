@@ -41,7 +41,7 @@
                   <span
                     ><router-link
                       :to="{
-                        name: 'Products',
+                        name: 'ProductsView',
                         params: { name: webalize(category.name), id: category.uid, title: category.name },
                       }"
                       >{{ category.name }}</router-link>
@@ -71,7 +71,7 @@
                   <span
                     ><router-link
                       :to="{
-                        name: 'Products',
+                        name: 'ProductsView',
                         params: { name: webalize(subcategory.name), id: subcategory.uid, title: subcategory.name },
                       }"
                       >{{ subcategory.name }}</router-link>
@@ -102,7 +102,7 @@
   
   
   export default {
-    name: 'CategoryMenu',
+    name: 'CategoryMenuIgnore',
     components: {
       Menu, 
       MenuButton, 
@@ -124,18 +124,18 @@
     apollo: {
       categories: {
         query: SUBCATEGORY,
-        update: (data) => data.categories.items[0]
-        // variables() {
-        //   if (this.mainCat == false) {
-        //     return {
-        //       category_uid: {},
-        //     }
-        //   } else {
-        //     return {
-        //       category_uid: this.mainCat,
-        //     }
-        //   }
-        // },
+        update: (data) => data.categories.items[0],
+        variables() {
+          if (this.mainCat == false) {
+            return {
+              category_uid: {},
+            }
+          } else {
+            return {
+              category_uid: this.mainCat,
+            }
+          }
+        },
       },
     },
     methods: {
