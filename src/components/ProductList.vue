@@ -72,6 +72,7 @@
         </div>
       </div>
     </div>
+    {{pagedForYou}}
   </div>
 </template>
 
@@ -123,7 +124,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.$store.state.pageToSee = 1
+      this.$store.dispatch('pagination/changePage', 1)
     },
     id(newId, oldId) {
       this.currentPage = 1
@@ -136,11 +137,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('pagination',[
       'getCurrentPage'
     ]),
     ...mapState([
-      'pageToSee'
+      'pagination'
     ]),
     totalPages() {
       return Math.ceil(this.products.total_count / this.selected)
@@ -157,34 +158,34 @@ export default {
     changePage(i) {
       this.products = []
       this.currentPage = i
-      this.$store.dispatch('changePage', i)
+      this.$store.dispatch('pagination/changePage', i)
     },
     onPrev() {
       if (this.currentPage > 1) {
         this.products = []
         this.currentPage--
-        this.$store.commit('ON_PREV')
+        this.$store.dispatch('pagination/onPrev')
       }
     },
     onNext() {
       if (this.currentPage < this.totalPages) {
         this.products = []
         this.currentPage++
-        this.$store.commit('ON_NEXT')
+        this.$store.dispatch('pagination/onNext')
       }
     },
     onLastPage(totalPages){
       if (this.currentPage < this.totalPages) {
         this.products = []
         this.currentPage =  totalPages
-        this.$store.commit('ON_LAST_PAGE', totalPages)
+        this.$store.dispatch('pagination/onLastPage', totalPages)
       }
     },
     onFirstPage(){
       if (this.currentPage > 1) {
         this.products = []
         this.currentPage =  1
-        this.$store.commit('ON_FIRST_PAGE')
+        this.$store.dispatch('pagination/onFirstPage')
       }
     }
   },
