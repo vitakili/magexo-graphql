@@ -76,8 +76,10 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from "vuex"
 import { PRODUCTS } from '../graphql/products'
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/vue/solid'
+
 
 export default {
   name: 'ProductList',
@@ -113,17 +115,20 @@ export default {
   },
   data() {
     return {
-      currentPage: 1,
+      currentPage: this.currentPage,
       products: [],
       pageSize: this.selected,
       numShown: 5,
     }
   },
   watch: {
-    id(pageId) {
+    $route(to, from) {
+      this.$store.state.pageToSee = 1
+    },
+    id(newId, oldId) {
       this.currentPage = 1
       this.$apollo.queries.products.refetch({
-        id: pageId,
+        id: newId,
         currentPage: this.currentPage,
         pageSize: this.selected,
         }
@@ -131,6 +136,12 @@ export default {
     },
   },
   computed: {
+    ...mapGetters([
+      'getCurrentPage'
+    ]),
+    ...mapState([
+      'pageToSee'
+    ]),
     totalPages() {
       return Math.ceil(this.products.total_count / this.selected)
     },
@@ -146,32 +157,40 @@ export default {
     changePage(i) {
       this.products = []
       this.currentPage = i
+      this.$store.dispatch('changePage', i)
     },
     onPrev() {
       if (this.currentPage > 1) {
         this.products = []
         this.currentPage--
+        this.$store.commit('ON_PREV')
       }
     },
     onNext() {
       if (this.currentPage < this.totalPages) {
         this.products = []
         this.currentPage++
+        this.$store.commit('ON_NEXT')
       }
     },
     onLastPage(totalPages){
       if (this.currentPage < this.totalPages) {
         this.products = []
         this.currentPage =  totalPages
+        this.$store.commit('ON_LAST_PAGE', totalPages)
       }
     },
     onFirstPage(){
       if (this.currentPage > 1) {
         this.products = []
         this.currentPage =  1
+        this.$store.commit('ON_FIRST_PAGE')
       }
     }
   },
+  mounted() {
+    this.currentPage = this.getCurrentPage;
+  }
 }
 </script>
 
